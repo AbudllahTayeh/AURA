@@ -1,14 +1,9 @@
-import asyncio
 
 from fastapi import FastAPI
 
-from apps.api.db.postgres import check_postgres
-from apps.api.db.qdrant import check_qdrant
-from apps.api.db.redis import check_redis
-
 from apps.api.db.postgres import check_postgres_health
-from apps.api.db.redis import check_redis_health
 from apps.api.db.qdrant import check_qdrant_health
+from apps.api.db.redis import check_redis_health
 
 app = FastAPI(
     title="AURA API",
