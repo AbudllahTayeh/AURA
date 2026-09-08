@@ -1,10 +1,10 @@
-from apps.api.core.config import get_settings
+from apps.api.core.config import settings
 
 import psycopg
 
 
 async def check_postgres() -> bool:
-    settings = get_settings()
+    settings = settings.database_url
 
     try:
         async with await psycopg.AsyncConnection.connect(
@@ -20,5 +20,16 @@ async def check_postgres() -> bool:
 
                 return result == (1,)
 
+    except Exception:
+        return False
+
+from apps.api.core.config import settings
+
+def check_postgres_health() -> bool:
+    try:
+        # Connects using the URL from your config and executes a simple ping
+        with psycopg.connect(settings.database_url) as conn:
+            conn.execute("SELECT 1")
+        return True
     except Exception:
         return False

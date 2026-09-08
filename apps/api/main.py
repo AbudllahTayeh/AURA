@@ -6,6 +6,9 @@ from apps.api.db.postgres import check_postgres
 from apps.api.db.qdrant import check_qdrant
 from apps.api.db.redis import check_redis
 
+from apps.api.db.postgres import check_postgres_health
+from apps.api.db.redis import check_redis_health
+from apps.api.db.qdrant import check_qdrant_health
 
 app = FastAPI(
     title="AURA API",
@@ -25,23 +28,15 @@ async def root() -> dict[str, str]:
 
 @app.get("/health")
 async def health() -> dict:
-    postgres_ok, redis_ok, qdrant_ok = await asyncio.gather(
-        check_postgres(),
-        check_redis(),
-        check_qdrant(),
-    )
-
     services = {
-        "postgres": "ok" if postgres_ok else "unavailable",
-        "redis": "ok" if redis_ok else "unavailable",
-        "qdrant": "ok" if qdrant_ok else "unavailable",
+        "postgres": "ok" if check_postgres_health() else "unavailable",
+        "redis": "ok" if check_redis_health() else "unavailable",
+        "qdrant": "ok" if check_qdrant_health() else "unavailable",
     }
-
-    all_services_ok = all(
-        [postgres_ok, redis_ok, qdrant_ok]
-    )
-
+    
+    status = "ok" if all(v == "ok" for v in services.values()) else "degraded"
+    
     return {
-        "status": "ok" if all_services_ok else "degraded",
-        "services": services,
+        "status": status,
+        "services": services
     }
