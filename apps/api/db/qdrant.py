@@ -1,10 +1,10 @@
 from qdrant_client import AsyncQdrantClient
-
-from apps.api.core.config import get_settings
+from qdrant_client import QdrantClient
+from apps.api.core.config import settings
 
 
 async def check_qdrant() -> bool:
-    settings = get_settings()
+    settings = settings.database_url
 
     client = AsyncQdrantClient(
         host=settings.qdrant_host,
@@ -20,3 +20,18 @@ async def check_qdrant() -> bool:
 
     finally:
         await client.close()
+
+
+
+# Persistent client for the RAG agent to use later
+qdrant_client = QdrantClient(
+    host=settings.qdrant_host, 
+    port=settings.qdrant_port
+)
+
+def check_qdrant_health() -> bool:
+    try:
+        qdrant_client.get_collections()
+        return True
+    except Exception:
+        return False
