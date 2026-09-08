@@ -1,31 +1,30 @@
-from functools import lru_cache
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 class Settings(BaseSettings):
-    app_name: str = "AURA API"
-    app_version: str = "0.1.0"
-
+    app_env: str = "development"
+    
+    # PostgreSQL
     postgres_host: str = "localhost"
     postgres_port: int = 5432
-    postgres_db: str = "aura"
-    postgres_user: str = "aura"
-    postgres_password: str = "aura_dev_password"
-
+    postgres_db: str
+    postgres_user: str
+    postgres_password: str
+    
+    # Redis
     redis_host: str = "localhost"
     redis_port: int = 6379
-
+    
+    # Qdrant
     qdrant_host: str = "localhost"
     qdrant_port: int = 6333
 
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        env_file_encoding="utf-8",
-        extra="ignore",
-    )
+    @property
+    def database_url(self) -> str:
+        # Constructs the PostgreSQL connection string automatically
+        return f"postgresql://{self.postgres_user}:{self.postgres_password}@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
 
+    # Tells Pydantic to read from the local .env file
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-@lru_cache
-def get_settings() -> Settings:
-    return Settings()
+# Instantiate it once to use across the whole app
+settings = Settings()
