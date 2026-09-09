@@ -1,4 +1,5 @@
-from typing import TypedDict, Annotated, List, Dict, Any
+from typing import Annotated, Any, Dict, List, TypedDict
+
 
 # Reducer function to append new messages instead of overwriting them
 def merge_lists(a: list, b: list) -> list:
