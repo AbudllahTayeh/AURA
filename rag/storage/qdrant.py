@@ -19,16 +19,20 @@ def upsert_chunks(chunks: list[str], embeddings: list[list[float]], start_id: in
     client.upsert(collection_name=COLLECTION_NAME, points=points)
 def search_qdrant(query_vector: list[float], top_k: int = 10) -> list[dict]:
     """
-    Searches Qdrant for the closest vectors to the query.
+    Searches Qdrant for the closest vectors to the query using the modern API.
     """
-    search_results = client.search(
+    # Use the new query_points method instead of search
+    results = client.query_points(
         collection_name=COLLECTION_NAME,
-        query_vector=query_vector,
+        query=query_vector,
         limit=top_k
     )
+    
+    # query_points returns a QueryResponse object containing a 'points' list
+    hits = results.points if hasattr(results, "points") else results
     
     # Format the output to match what hybrid.py expects
     return [
         {"id": hit.id, "score": hit.score, "text": hit.payload.get("text", "")} 
-        for hit in search_results
+        for hit in hits
     ]
