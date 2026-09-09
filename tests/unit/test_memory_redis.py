@@ -1,5 +1,6 @@
 from memory.short_term.redis_store import ShortTermMemoryManager
 
+
 def test_redis_short_term_store():
     memory = ShortTermMemoryManager()
     mock_state = {"query": "Compare Vector DBs", "status": "in_progress"}
