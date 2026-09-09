@@ -1,6 +1,6 @@
 from typing import Any, Dict
-from decisions.recommendations.generator import generate_final_recommendation
-from decisions.scoring.engine import calculate_weighted_scores
+from agents.decisions.recommendations.generator import generate_final_recommendation
+from agents.decisions.scoring.engine import calculate_weighted_scores
 
 # Note: You will import AuraState here once Abd finalizes agents/common/state.py
 
