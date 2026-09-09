@@ -1,5 +1,5 @@
 from pathlib import Path
-import fitz  # PyMuPDF
+import pymupdf  # Replaced fitz
 from bs4 import BeautifulSoup
 from pydantic import BaseModel
 
@@ -8,7 +8,7 @@ class DocumentChunk(BaseModel):
     metadata: dict
 
 def parse_pdf(file_path: Path) -> str:
-    doc = fitz.open(file_path)
+    doc = pymupdf.open(file_path)  # Replaced fitz.open
     text = []
     for page_num in range(len(doc)):
         page = doc.load_page(page_num)

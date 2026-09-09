@@ -17,6 +17,9 @@ from rag.retrieval.reranker import rerank_results
 
 app = FastAPI(title="AURA RAG Agent API")
 
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy", "service": "rag-agent"}
 # Initialize Qdrant and Postgres on startup
 @app.on_event("startup")
 def startup_event():
