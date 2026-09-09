@@ -36,7 +36,7 @@ def generate_plan(state: AuraState):
 
     llm = ChatGoogleGenerativeAI(
         api_key=os.getenv("GEMINI_API_KEY"),
-        model="gemini-3.6-flash",
+        model="gemini-3.8-flash",
     )
 
     structured_llm = llm.with_structured_output(PlanOutput, method="json_schema")
