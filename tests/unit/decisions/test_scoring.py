@@ -8,6 +8,7 @@ from decisions.recommendations.generator import (
 )
 from decisions.scoring.engine import calculate_weighted_scores
 
+
 def test_calculate_weighted_scores():
     criteria = [
         DecisionCriterion(

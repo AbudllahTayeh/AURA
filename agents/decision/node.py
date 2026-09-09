@@ -1,7 +1,7 @@
-from typing import Any, Dict
+from agents.common.state import AuraState
 from decisions.recommendations.generator import generate_final_recommendation
 from decisions.scoring.engine import calculate_weighted_scores
-from agents.common.state import AuraState  
+
 
 def decision_node(state: AuraState) -> AuraState:
     """LangGraph node that runs the Decision Intelligence logic on current state."""
