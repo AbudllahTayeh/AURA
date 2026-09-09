@@ -1,13 +1,12 @@
-from agents.decisions.criteria.models import (
+from decisions.criteria.models import (
     AlternativeOption,
     DecisionCriterion,
     EvidenceScore,
 )
-from agents.decisions.recommendations.generator import (
+from decisions.recommendations.generator import (
     generate_final_recommendation,
 )
-from agents.decisions.scoring.engine import calculate_weighted_scores
-
+from decisions.scoring.engine import calculate_weighted_scores
 
 def test_calculate_weighted_scores():
     criteria = [
