@@ -9,7 +9,10 @@ class ResearchChangeDetector:
         old_artifact: ResearchSessionArtifact,
         new_artifact: ResearchSessionArtifact,
     ) -> Dict[str, Any]:
-        """Compares two research artifacts and returns differences in sources and findings."""
+        """Compares two research artifacts and returns differences.
+
+        Tracks added/removed sources and content updates.
+        """
         old_sources = set(old_artifact.sources_used)
         new_sources = set(new_artifact.sources_used)
 
