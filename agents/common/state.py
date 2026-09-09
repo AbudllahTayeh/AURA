@@ -27,3 +27,7 @@ class AuraState(TypedDict):
     
     # The ultimate output of the Decision Agent
     final_report: str
+
+    criteria: List[Dict[str, Any]]
+    alternatives: List[Dict[str, Any]]
+    objective: str

@@ -1,6 +1,6 @@
 from typing import List
 
-from decisions.criteria.models import AlternativeOption, DecisionCriterion
+from agents.decisions.criteria.models import AlternativeOption, DecisionCriterion
 
 
 def calculate_weighted_scores(
