@@ -1,12 +1,9 @@
-from typing import Any, Dict
-
-from agents.decisions.recommendations.generator import generate_final_recommendation
-from agents.decisions.scoring.engine import calculate_weighted_scores
-
-# Note: You will import AuraState here once Abd finalizes agents/common/state.py
+from agents.common.state import AuraState
+from decisions.recommendations.generator import generate_final_recommendation
+from decisions.scoring.engine import calculate_weighted_scores
 
 
-def decision_node(state: Dict[str, Any]) -> Dict[str, Any]:
+def decision_node(state: AuraState) -> AuraState:
     """LangGraph node that runs the Decision Intelligence logic on current state."""
 
     # 1. Extract verified evidence and criteria from the global state

@@ -1,6 +1,6 @@
 from typing import List
 
-from agents.decisions.criteria.models import (
+from decisions.criteria.models import (
     AlternativeOption,
     DecisionCriterion,
     FinalRecommendation,
