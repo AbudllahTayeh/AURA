@@ -1,6 +1,8 @@
-from agents.workflow import build_master_graph
 from langgraph.checkpoint.postgres import PostgresSaver
+
+from agents.workflow import build_master_graph
 from apps.api.core.config import settings
+
 
 def main():
     # 1. Use the DB URL defined in your FastAPI config
@@ -24,7 +26,10 @@ def main():
         }
         
         initial_state = {
-            "query": "Compare Qdrant, Pinecone, and Weaviate for a production RAG application."
+            "query": (
+                "Compare Qdrant, Pinecone, and Weaviate "
+                "for a production RAG application."
+            )
         }
         
         print("🚀 Starting Master Workflow with Postgres Checkpointing...")

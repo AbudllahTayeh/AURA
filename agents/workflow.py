@@ -1,8 +1,10 @@
 from typing import Any, Dict
+
 from langgraph.graph import END, StateGraph
 
 from agents.common.state import AuraState
 from agents.planner.graph import generate_plan
+
 
 # ---------------------------------------------------------
 # 1. Mock Nodes (Placeholders for Qusai and Amr)
@@ -24,7 +26,7 @@ def mock_researcher(state: AuraState) -> Dict[str, Any]:
     }
 
 def mock_decision(state: AuraState) -> Dict[str, Any]:
-    print(f"--- [MOCK DECISION] Generating final recommendation ---")
+    print("--- [MOCK DECISION] Generating final recommendation ---")
     return {
         "final_report": "Mock Recommendation: Qdrant is the best option."
     }
