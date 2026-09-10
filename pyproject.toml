@@ -49,6 +49,7 @@ include = [
     "memory*",
     "evaluation*",
     "verification*",
+    "decisions*",
 ]
 
 [tool.pytest.ini_options]
