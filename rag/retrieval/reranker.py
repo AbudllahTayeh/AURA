@@ -1,10 +1,16 @@
 from sentence_transformers import CrossEncoder
+import torch
+from sentence_transformers import CrossEncoder
 
 # Initialize the cross-encoder model
 # 'cross-encoder/ms-marco-MiniLM-L-6-v2' is a standard, fast, 
 # and effective choice for RAG
-model = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
-
+# model = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
+# Load the model in half-precision (float16) to fit in a 4GB GPU
+model = CrossEncoder(
+    'Qwen/Qwen3-Reranker-0.6B',
+    model_kwargs={"torch_dtype": torch.float16} # Keeps memory usage very low
+)
 
 def rerank_results(
     query: str, retrieved_docs: list[dict], top_k: int = 3
