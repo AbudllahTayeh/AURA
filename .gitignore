@@ -53,3 +53,6 @@ models/
 .ipynb_checkpoints/
 
 *.egg-info/
+
+# Personal Notes and Files
+*Personal_README.md
