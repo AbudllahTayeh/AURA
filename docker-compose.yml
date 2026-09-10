@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_DB: aura
       POSTGRES_USER: aura
-      POSTGRES_PASSWORD: aura_dev_password
+      POSTGRES_PASSWORD: pass
 
     ports:
       - "5432:5432"
