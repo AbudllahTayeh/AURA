@@ -1,4 +1,4 @@
-from verification.claims.models import Claim, Evidence, ClaimStatus
+from verification.claims.models import Claim, ClaimStatus, Evidence
 
 
 def _word_overlap_score(text_a: str, text_b: str) -> float:

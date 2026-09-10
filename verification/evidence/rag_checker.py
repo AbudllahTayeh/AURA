@@ -1,11 +1,11 @@
-import os
 import json
+import os
 
 from dotenv import load_dotenv
 from google import genai
 
-from verification.claims.models import Claim, Evidence, ClaimStatus
 from rag.tools import query_knowledge_base
+from verification.claims.models import Claim, ClaimStatus
 
 load_dotenv()
 

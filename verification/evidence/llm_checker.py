@@ -1,10 +1,10 @@
-import os
 import json
+import os
 
 from dotenv import load_dotenv
 from google import genai
 
-from verification.claims.models import Claim, Evidence, ClaimStatus
+from verification.claims.models import Claim, ClaimStatus, Evidence
 
 load_dotenv()
 
