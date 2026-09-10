@@ -44,13 +44,12 @@ dev = [
 
 [tool.setuptools.packages.find]
 include = [
-    "apps",
-    "agents",
-    "rag",
-    "tools",
-    "memory",
-    "evaluation",
-    "decisions*",
+    "apps*",
+    "agents*",
+    "rag*",
+    "tools*",
+    "memory*",
+    "evaluation*",
 ]
 
 [tool.pytest.ini_options]
