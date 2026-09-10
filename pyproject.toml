@@ -24,6 +24,8 @@ dependencies = [
     "PyYAML>=6.0.3",
     "tenacity>=9.1.4",
     "google-genai>=2.22.0",
+    "langchain-google-genai",
+    "langgraph-checkpoint-postgres", 
 ]
 
 [project.optional-dependencies]
