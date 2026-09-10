@@ -4,6 +4,7 @@ from langgraph.graph import END, StateGraph
 
 from agents.common.state import AuraState
 from agents.planner.graph import generate_plan
+from agents.verification.node import verification_node
 
 
 # ---------------------------------------------------------
@@ -56,6 +57,7 @@ def build_master_graph(checkpointer=None):  # <-- Add argument here
     workflow.add_node("planner", generate_plan)
     workflow.add_node("researcher", mock_researcher)
     workflow.add_node("decision", mock_decision)
+    workflow.add_node("verification", verification_node)
     
     # Define the starting point
     workflow.set_entry_point("planner")
@@ -72,7 +74,8 @@ def build_master_graph(checkpointer=None):  # <-- Add argument here
         path_map={"researcher": "researcher", "decision": "decision"}
     )
     
-    workflow.add_edge("decision", END)
+    workflow.add_edge("decision", "verification")
+    workflow.add_edge("verification", END)
     
     # Pass the checkpointer into compile()
     return workflow.compile(checkpointer=checkpointer)
