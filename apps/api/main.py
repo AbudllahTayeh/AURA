@@ -10,6 +10,7 @@ app = FastAPI(
     description="Autonomous Research & Decision Intelligence Platform",
 )
 
+
 @app.get("/health")
 async def health() -> dict:
     services = {
@@ -17,10 +18,7 @@ async def health() -> dict:
         "redis": "ok" if await check_redis() else "unavailable",
         "qdrant": "ok" if await check_qdrant() else "unavailable",
     }
-    
+
     status = "ok" if all(v == "ok" for v in services.values()) else "degraded"
-    
-    return {
-        "status": status,
-        "services": services
-    }
+
+    return {"status": status, "services": services}

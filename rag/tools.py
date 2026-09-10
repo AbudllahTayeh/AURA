@@ -1,16 +1,18 @@
 from langchain_core.tools import tool
+
 from rag.embeddings.embedder import get_embeddings
-from rag.storage.qdrant import search_qdrant
-from rag.storage.postgres import get_all_chunks
 from rag.retrieval.hybrid import retrieve_hybrid
 from rag.retrieval.reranker import rerank_results
+from rag.storage.postgres import get_all_chunks
+from rag.storage.qdrant import search_qdrant
+
 
 @tool
 def query_knowledge_base(query: str, top_k: int = 3) -> str:
     """
-    Searches the AURA Knowledge Base using hybrid retrieval (Dense + BM25) and 
+    Searches the AURA Knowledge Base using hybrid retrieval (Dense + BM25) and
     Cross-Encoder reranking to find the most relevant document chunks for a given query.
-    
+
     Args:
         query: The natural language question or search prompt.
         top_k: The number of final best matching chunks to return.
@@ -29,17 +31,15 @@ def query_knowledge_base(query: str, top_k: int = 3) -> str:
 
         # 4. Run BM25 + RRF (Hybrid Retrieval)
         hybrid_results = retrieve_hybrid(
-            query=query, 
-            corpus_chunks=corpus, 
-            dense_results=dense_results, 
-            top_k=max(5, top_k * 2)
+            query=query,
+            corpus_chunks=corpus,
+            dense_results=dense_results,
+            top_k=max(5, top_k * 2),
         )
 
         # 5. Run Cross-Encoder (Reranking)
         final_results = rerank_results(
-            query=query, 
-            retrieved_docs=hybrid_results, 
-            top_k=top_k
+            query=query, retrieved_docs=hybrid_results, top_k=top_k
         )
 
         if not final_results:
@@ -47,9 +47,12 @@ def query_knowledge_base(query: str, top_k: int = 3) -> str:
 
         # 6. Format the chunks cleanly into a string response for the agent
         formatted_context = ""
+        # Line 53
         for i, doc in enumerate(final_results, 1):
-            formatted_context += f"[Chunk {i}] (Score: {doc.get('cross_encoder_score', 0):.4f})\n{doc['text'].strip()}\n\n"
-
+            formatted_context += (
+                f"[Chunk {i}] (Score: {doc.get('cross_encoder_score', 0):.4f})\n"
+                f"{doc['text'].strip()}\n\n"
+            )
         return formatted_context
 
     except Exception as e:

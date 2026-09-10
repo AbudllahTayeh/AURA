@@ -24,8 +24,7 @@ class PlanOutput(BaseModel):
 
     steps: List[str] = Field(
         description=(
-            "A clear, sequential list of steps to research "
-            "and answer the user query."
+            "A clear, sequential list of steps to research and answer the user query."
         )
     )
 

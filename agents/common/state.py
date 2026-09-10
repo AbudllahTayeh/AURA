@@ -9,21 +9,22 @@ def merge_lists(a: list, b: list) -> list:
         return a
     return a + b
 
+
 class AuraState(TypedDict):
     # The original user question
-    query: str 
-    
+    query: str
+
     # The list of sub-tasks the Planner creates
-    plan: List[str] 
-    
+    plan: List[str]
+
     # Track which step we are currently executing
-    current_step: int 
-    
+    current_step: int
+
     # A dictionary holding all retrieved documents and evidence
-    research_data: Dict[str, Any] 
-    
+    research_data: Dict[str, Any]
+
     # A log of messages/actions passed between agents, appended sequentially
-    messages: Annotated[list, merge_lists] 
-    
+    messages: Annotated[list, merge_lists]
+
     # The ultimate output of the Decision Agent
     final_report: str

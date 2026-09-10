@@ -9,6 +9,7 @@ redis_client = Redis(
     decode_responses=True,
 )
 
+
 async def check_redis() -> bool:
     try:
         return await redis_client.ping()

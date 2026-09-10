@@ -8,6 +8,7 @@ qdrant_client = AsyncQdrantClient(
     port=settings.qdrant_port,
 )
 
+
 async def check_qdrant() -> bool:
     try:
         await qdrant_client.get_collections()
