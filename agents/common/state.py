@@ -31,3 +31,7 @@ class AuraState(TypedDict):
     criteria: List[Dict[str, Any]]
     alternatives: List[Dict[str, Any]]
     objective: str
+
+    # Verification Agent output: list of claims with their
+    # verification status, confidence, and supporting evidence
+    verified_claims: List[Dict[str, Any]]
