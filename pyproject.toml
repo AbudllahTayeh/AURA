@@ -23,9 +23,19 @@ dependencies = [
     "python-dotenv>=1.2.3",
     "PyYAML>=6.0.3",
     "tenacity>=9.1.4",
+<<<<<<< HEAD
     "langchain-google-genai",
     "langgraph-checkpoint-postgres", 
+=======
+    "ddgs>=6.0.0",
+    "trafilatura>=1.9.0", 
+    "arxiv>=2.1.0",
+    "langchain-google-genai>=2.0.0",
+    "youtube-transcript-api>=0.6.2",
+    "wikipedia>=1.4.0",
+>>>>>>> 285bddd (feat: complete research agent with tools and structured output)
 ]
+
 
 [project.optional-dependencies]
 dev = [
@@ -37,12 +47,12 @@ dev = [
 
 [tool.setuptools.packages.find]
 include = [
-    "apps*",
-    "agents*",
-    "rag*",
-    "tools*",
-    "memory*",
-    "evaluation*",
+    "apps",
+    "agents",
+    "rag",
+    "tools",
+    "memory",
+    "evaluation",
     "decisions*",
 ]
 
@@ -57,6 +67,8 @@ target-version = "py314"
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]
+ignore = ["E501"]
+
 
 [tool.mypy]
 python_version = "3.14"
