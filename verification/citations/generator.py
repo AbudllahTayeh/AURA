@@ -22,7 +22,10 @@ def generate_citation_report(claims: list[Claim]) -> str:
 
     total = len(claims)
     coverage = len(supported) / total if total else 0.0
-    lines.append(f"**Citation Coverage:** {coverage:.0%} ({len(supported)}/{total} claims supported)\n")
+    lines.append(
+        f"**Citation Coverage:** {coverage:.0%} "
+        f"({len(supported)}/{total} claims supported)\n"
+    )
 
     if supported:
         lines.append("## ✅ Supported Claims\n")
@@ -55,3 +58,4 @@ def generate_citation_report(claims: list[Claim]) -> str:
         lines.append("")
 
     return "\n".join(lines)
+    
