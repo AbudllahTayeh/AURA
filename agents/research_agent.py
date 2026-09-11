@@ -85,7 +85,6 @@ research_tools = [
 # ==========================================
 llm = ChatGoogleGenerativeAI(
     model="gemini-3.6-flash",
-    api_key=os.getenv("GEMINI_API_KEY"),
     api_key=os.getenv("GEMINI_API_KEY", "mock_key_for_ci_tests"),
     temperature=0.2 
 )
