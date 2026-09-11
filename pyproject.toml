@@ -44,12 +44,12 @@ dev = [
 
 [tool.setuptools.packages.find]
 include = [
-    "apps*",
-    "agents*",
-    "rag*",
-    "tools*",
-    "memory*",
-    "evaluation*",
+    "apps",
+    "agents",
+    "rag",
+    "tools",
+    "memory",
+    "evaluation",
     "decisions*",
 ]
 
