@@ -55,4 +55,4 @@ models/
 *.egg-info/
 
 # Personal Notes and Files
-*Personal_README.md
+.vscode/

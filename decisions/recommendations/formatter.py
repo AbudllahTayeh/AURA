@@ -1,5 +1,6 @@
 from decisions.criteria.models import FinalRecommendation
 
+
 def format_decision_report(recommendation: FinalRecommendation) -> str:
     """Transforms the decision data into a structured Markdown report for the UI."""
     report = f"## Decision Recommendation: {recommendation.recommended_option}\n\n"

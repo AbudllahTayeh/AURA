@@ -9,7 +9,7 @@ def merge_lists(a: list, b: list) -> list:
         return a
     return a + b
 
-class AuraState(TypedDict):
+class AuraState(TypedDict, total=False):
     # The original user question
     query: str 
     
