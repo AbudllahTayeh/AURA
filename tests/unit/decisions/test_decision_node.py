@@ -56,7 +56,15 @@ def test_decision_node_generates_markdown_report():
     result = decision_node(state)
 
     assert "final_report" in result
-    assert "Decision Recommendation: Qdrant" in result["final_report"]
+    report = result["final_report"]
+    assert "## Decision Recommendation: Qdrant" in report
+    assert "### Criteria Comparison Matrix" in report
+    assert "| Criterion | Weight | Qdrant | Pinecone |" in report
+    assert "| **Cost** | 50% | 9.0/10 | 5.0/10 |" in report
+    assert "| **Performance** | 50% | 8.5/10 | 9.0/10 |" in report
+    assert "### Evidence & Citation Traceability" in report
+    assert "*(Citations: doc1)*" in report
+    assert "[SUPPORTED]: Open source and self-hostable" in report
     assert result["current_step"] == 3
 
 

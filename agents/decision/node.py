@@ -1,13 +1,14 @@
 from typing import Any, Dict
 
 from agents.common.state import AuraState
+from decisions.criteria.extractor import extract_criteria_and_alternatives
 from decisions.criteria.models import AlternativeOption, DecisionCriterion
 from decisions.recommendations.formatter import format_decision_report
 from decisions.recommendations.generator import generate_final_recommendation
 from decisions.scoring.engine import calculate_weighted_scores
 
 
-def decision_node(state: AuraState | Dict[str, Any]) -> Dict[str, Any]:
+def decision_node(state: AuraState) -> Dict[str, Any]:
     """LangGraph node that runs the Decision Intelligence logic on current state."""
     objective = state.get("objective") or state.get("query", "Unknown Objective")
 
@@ -20,6 +21,16 @@ def decision_node(state: AuraState | Dict[str, Any]) -> Dict[str, Any]:
     options = [
         AlternativeOption(**opt) if isinstance(opt, dict) else opt for opt in raw_options
     ]
+
+    # Autonomous extraction from research_data if not pre-populated
+    if (not criteria or not options) and state.get("research_data"):
+        extracted_criteria, extracted_options = extract_criteria_and_alternatives(
+            objective, state["research_data"]
+        )
+        if not criteria and extracted_criteria:
+            criteria = extracted_criteria
+        if not options and extracted_options:
+            options = extracted_options
 
     scored_options = calculate_weighted_scores(options, criteria)
     recommendation = generate_final_recommendation(objective, scored_options, criteria)

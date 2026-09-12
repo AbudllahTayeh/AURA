@@ -1,4 +1,6 @@
-from typing import Annotated, Any, Dict, List, TypedDict
+from typing import Annotated, Any, Dict, List
+
+from typing_extensions import TypedDict
 
 
 # Reducer function to append new messages instead of overwriting them

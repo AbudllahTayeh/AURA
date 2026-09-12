@@ -56,3 +56,5 @@ models/
 
 # Personal Notes and Files
 .vscode/
+docs/README.md*
+*:Zone.Identifier
